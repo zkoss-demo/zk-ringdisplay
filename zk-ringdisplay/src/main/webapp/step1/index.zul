@@ -1,0 +1,89 @@
+<?script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"?>
+<zk xmlns:w="client">
+	<style>
+		.scene {
+		  border: 1px solid #CCC;
+		  margin: 40px 0;
+		  position: relative;
+		  width: 800px;
+		  height: 400px;
+		  perspective: 600px;
+		}
+		.frame {
+		  width: 100%;
+		  height: 100%;
+		  position: absolute;
+		  transform: translateZ(-288px);
+		  transform-style: preserve-3d;
+		  transition: transform 1s;
+		}
+		
+		.item {
+		  background-color: rgba(0,255,0,0.4);
+		  border: 1px red solid;
+		  position: absolute;
+		  width: 150px;
+		  height: 120px;
+		  left: calc(50% - 75px);
+		  top: 150px;
+		  border: 2px solid black;
+		  line-height: 116px;
+		  font-size: 80px;
+		  font-weight: bold;
+		  color: white;
+		  text-align: center;
+		  transition: transform 1s;
+		}
+		
+	</style>
+	<script defer="true"><![CDATA[
+		var frame = document.querySelector('.frame');
+		var items = frame.querySelectorAll('.item');
+		var radius = 500;
+		var nbItems = items.length;
+		var theta = 360 / nbItems;
+		var selectedIndex = 0;
+		
+		function rotateItems() {
+		  var frameAngle = theta * selectedIndex * -1;
+		  for ( var i=0; i < items.length; i++ ) {
+		    var item = items[i];
+		      var itemAngle = theta * i;
+		      item.style.transform = 'rotateY(' + itemAngle + 'deg) translateZ(' + radius + 'px) rotateY('+ ( -1 * (frameAngle + itemAngle)) +'deg)';
+		  }
+		  frame.style.transform = 'translateZ(' + -radius + 'px)  rotateY(' + frameAngle + 'deg)';
+		}
+		
+
+		jq(".item").each(function(index,item){
+			jq(item).on('click',function(evt){
+				selectedIndex = jq(item).index();
+				console.log(selectedIndex);
+				rotateItems();
+			});
+		});
+		
+		//initialize item posisition on page load
+		rotateItems();
+		]]></script>
+	<div sclass="scene">
+		<div sclass="frame">
+			<div sclass="item">test 1</div>
+			<div sclass="item">test 2</div>
+			<div sclass="item">test 3</div>
+			<div sclass="item">test 4</div>
+			<div sclass="item">test 5</div>
+			<div sclass="item">test 6</div>
+			<div sclass="item">test 7</div>
+			<div sclass="item">test 8</div>
+			<div sclass="item">test 9</div>
+			<div sclass="item">test 10</div>
+			<div sclass="item">test 11</div>
+			<div sclass="item">test 12</div>
+			<div sclass="item">test 13</div>
+			<div sclass="item">test 14</div>
+			<div sclass="item">test 15</div>
+			<div sclass="item">test 16</div>
+		</div>
+	</div>
+</zk>

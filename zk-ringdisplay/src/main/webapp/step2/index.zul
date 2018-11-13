@@ -1,0 +1,84 @@
+<?link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet"?>
+<zk>
+	<style>
+		.itemText{
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+		.itemTextVisible{
+			transition: opacity 0.3s ease-in-out 0.3s;
+			opacity: 1;
+		}
+		.itemTextHidden{
+			transition: opacity 0.3s ease-in-out 0s;
+			opacity: 0;
+			pointer-events:none;
+		}
+		.decriptionbox{
+			position: relative;
+			overflow: hidden;
+		}
+		.itemText .item-name,.itemText .more-button{
+			font-family: 'Lato', sans-serif;
+		}
+		.itemText .item-name,{
+			font-weight: bold;
+		}
+		.left, .right{
+			background-color: #fff;
+			font-size: 40px;
+			color: #a3a3a3;
+		}
+		.item-name, .item-description, .more-button{
+			color: #4a4a4a;
+		}
+		.item-name{
+			font-size: 27px;
+			font-weight: bold;
+		}
+		.item-description{
+			font-size: 16px;
+		}
+		.more-button{
+			background-color: #fff;
+			border: 1px #979797 solid;
+		    border-radius: 27px;
+		    font-size:20px;
+		    height:40px;
+		    width: 160px
+		}
+		.more-button:hover{
+			background-color: #ccc;
+		}
+	</style>
+	<div viewModel="@id('vm')@init('org.potix.zk_ringdisplay.step2.RingExampleVm')">
+		<vlayout hflex="1" style='text-align: center;'>
+			<ringdisplay selectedIndex="@load(vm.selectedIndex)" hflex="1" height="500px" itemWidth="250"
+				perspective="1000px" depth="300px" clickToTurn="false">
+				<forEach items="@load(vm.chairModel)">
+					<ringitem>
+						<image src='${each.imageUrl}' height="300px" />
+					</ringitem>
+				</forEach>
+			</ringdisplay>
+			<hlayout valign="middle">
+				<a sclass="left" iconSclass="z-icon-chevron-left"
+					onClick="@command('previous')" />
+				<div width="300px" height="110px" sclass="decriptionbox">	
+					<forEach items="@load(vm.chairModel)">
+						<vlayout  width="300px" sclass='@load(each.selected?"itemText itemTextVisible":"itemText itemTextHidden")'>
+							<label sclass="item-name"
+								value="@load(each.name)" />
+							<label sclass="item-description"
+								value="@load(each.description)" />
+							<button sclass="more-button" label="Learn more" onClick="@command('doItemClick', data=each.commandData)"/>
+						</vlayout>
+					</forEach>
+				</div>
+				<a sclass="right" iconSclass="z-icon-chevron-right"
+					onClick="@command('next')" />
+			</hlayout>
+		</vlayout>
+	</div>
+</zk>

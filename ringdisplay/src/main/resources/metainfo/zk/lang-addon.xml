@@ -1,0 +1,38 @@
+<language-addon>
+<!-- 	addon name (unique) -->
+    <addon-name>ringdisplay</addon-name>
+  	<version>
+		<version-class>org.potix.ringdisplay.Version</version-class>
+		<version-uid>0.0.1-SNAPSHOT</version-uid>
+		<zk-version>8.5.0</zk-version><!-- or later -->
+	</version>
+    
+<!--     component to be added to the language "xul/html" -->
+	<language-name>xul/html</language-name>
+<!-- 	multiple components can be declared in the same addon file -->
+	<component>
+<!-- 		name to be used in a zul file -->
+		<component-name>ringdisplay</component-name> <!-- required -->
+<!-- 		Java class to instantiate for this component -->
+		<component-class>org.potix.ringdisplay.Ringdisplay</component-class> <!-- required -->
+<!-- 			JavaScript class to use in client -->
+		<widget-class>ringdisplay.Ringdisplay</widget-class> <!-- required -->
+<!-- 		multiple molds can be declared for each component -->
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/ringdisplay.js</mold-uri>
+			<css-uri>css/ringdisplay.css.dsp</css-uri>
+		</mold>
+	</component>
+	<component>
+		<component-name>ringitem</component-name> <!-- required -->
+<!-- 		no java customization, use default div class -->
+		<component-class>org.zkoss.zul.Div</component-class> <!-- required -->
+		<widget-class>ringdisplay.Ringitem</widget-class> <!-- required -->
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/ringitem.js</mold-uri>
+			<css-uri>css/ringitem.css.dsp</css-uri>
+		</mold>
+	</component>
+</language-addon>
